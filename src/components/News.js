@@ -36,7 +36,7 @@ export class News extends Component {
         async componentDidMount() {
           // console.log("cdm");
           this.props.setProgress(30);
-          let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3158d6c76dbe4e33b5ae04e165c143b6&pageSize=${this.props.pageSize}`;
+          let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&pageSize=${this.props.pageSize}`;
           this.setState({loading:true})
           this.props.setProgress(50);
           let data = await fetch(url);
@@ -51,7 +51,7 @@ export class News extends Component {
         handlePrevClick = async()=>{
           console.log("next")
           this.props.setProgress(30);
-          let url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3158d6c76dbe4e33b5ae04e165c143b6&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
+          let url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
           this.setState({loading:true})
           this.props.setProgress(50);
           let data = await fetch(url);
@@ -66,7 +66,7 @@ export class News extends Component {
         handleNextClick = async ()=>{
           console.log("next")
           this.props.setProgress(30);
-         let url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3158d6c76dbe4e33b5ae04e165c143b6&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+         let url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
          this.setState({loading:true})
          this.props.setProgress(50);
           let data = await fetch(url);
@@ -83,7 +83,7 @@ export class News extends Component {
   render() {
     return (
       <div className="container my-4">
-        <h2 className='text-center'>News Headlines</h2>
+        <h2 className='text-center' style={{marginTop:'90px', marginBottom:'20px'}}>News Headlines of {this.capitalizeFirstLetter(this.props.category)}</h2>
         {this.state.loading && <Spinner/>}
         <div className="row">
           {!this.state.loading && this.state.articles.map((element)=>{
